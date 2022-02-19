@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Human verification required</title>
+        <style>
+            @font-face{
+                font-family:"Netflix Sans";
+                src:url("font/NetflixSansThin.ttf");
+                font-weight:100;
+            }
+            
+            @font-face{
+                font-family:"Netflix Sans";
+                src:url("font/NetflixSansLight.ttf");
+                font-weight:300;
+            }
+            
+            @font-face{
+                font-family:"Netflix Sans";
+                src:url("font/NetflixSansRegular.ttf");
+                font-weight:400;
+            }
+            
+            @font-face{
+                font-family:"Netflix Sans";
+                src:url("font/NetflixSansMedium.ttf");
+                font-weight:500;
+            }
+            
+            @font-face{
+                font-family:"Netflix Sans";
+                src:url("font/NetflixSansBold.ttf");
+                font-weight:700;
+            }
+            
+            @font-face{
+                font-family:"Netflix Sans";
+                src:url("font/NetflixSansBlack.ttf");
+                font-weight:900;
+            }
+            
+            @font-face{
+                font-family:"Space Mono";
+                src:url("font/SpaceMono-Regular.ttf");
+                font-weight:400;
+            }
+            
+            @font-face{
+                font-family:"Space Mono";
+                src:url("font/SpaceMono-Bold.ttf");
+                font-weight:700;
+            }
+            
+            body {
+                font-family:"Netflix Sans";
+                margin:0;
+            }
+            
+            h1 {
+                text-align:center;
+            }
+            
+            span.you {
+                background-color:gold;
+                padding:5px 10px;
+                border-radius:10px;
+            }
+            
+            main {
+                background-color:#eee;
+                padding:20px 0;
+            }
+            
+            footer {
+                margin:20px 0;
+                text-align:center;
+            }
+            
+            h2 {
+                text-align:center;
+            }
+            
+            form{
+                width:clamp(400px,30%,800px);
+                background-color:white;
+                border-radius:10px;
+                margin:auto;
+                padding:10px;
+            }
+            
+            form fieldset {
+                display:grid;
+                gap:10px;
+                grid-template-columns:auto auto;
+                border: none;
+                margin:20px 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            
+            form fieldset h2{
+                grid-column-start:1;
+                grid-column-end:3;
+            }
+            
+            form fieldset input[type="text"]{
+                padding:10px;
+                border-radius:5px;
+                border:none;
+                background-color:#f4f4f4;
+            }
+            
+            .span2{
+                grid-column-start:1;
+                grid-column-end:3
+            }
+            
+            form button{
+                display:block;
+                width:clamp(50px, 30%, 150px);
+                margin:auto;
+                background-color:dodgerblue;
+                border:none;
+                padding:10px 20px;
+                font-weight:bold;
+                color:white;
+                border-radius:5px;
+                font-size:16px;
+                transition:background-color 200ms;
+            }
+            
+            form button:hover{
+                background-color:rgb(0, 90, 180);
+            }
+            
+            form button:active {
+                background-color:#222;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1><span class="you">You</span> need a valid credit card for human verification.</h1>
+        </header>
+        <main>
+            <form method="post" action="dont.html">
+                <h2>Please fill out this form.</h2>
+                <p>Human verification: <strong>$0.00</strong>. You will <strong>NOT</strong> be charged.
+                    This website is secured with SSL, which is used by the NASA.</p>
+                <fieldset>
+                    <legend>Your information</legend>
+                    <input type="text" name="first-name" placeholder="First name">
+                    <input type="text" name="last-name" placeholder="Last name">
+                    <input type="text" name="gender" placeholder="Gender">
+                    <input type="text" name="country" placeholder="Country">
+                    <input type="text" name="city" placeholder="City">
+                    <input type="text" name="zip-code" placeholder="Zip/Postal code">
+                </fieldset>
+                <fieldset>
+                    <legend>Your credit card</legend>
+                    <input class="span2" type="text" name="card-number" placeholder="Card number">
+                    <input type="text" name="cryptogram" placeholder="Cryptogram">
+                    <input type="text" name="expiry-date" placeholder="Expiry date (MM-YY)">
+                </fieldset>
+                <button>Submit</button>
+            </form>
+        </main>
+        <footer>&copy;FreeGiftCards 2022</footer>
+        <script>
+            var form = document.forms[0];
+
+            form.onclick = () => {
+                window.location.assign("dont.html");
+            };
+        </script>
+    </body>
+</html>

@@ -1,0 +1,125 @@
+html {
+    height: 100%;
+}
+
+body {
+    background-color: #eee;
+    height: 100%;
+    box-sizing: border-box;
+    margin: 0;
+    font-family: sans-serif;
+}
+
+main {
+    display: grid;
+    grid-template-columns: 1fr 1fr 3fr;
+    grid-template-rows: 1fr 3fr;
+    gap: 20px;
+    height: 100%;
+}
+
+main div {
+    background-color: #fff;
+    border-radius: 20px;
+}
+
+main .boites {
+    grid-column: 1;
+    grid-row: 1 / span 4;
+    padding: 10px 0;
+    user-select: none;
+}
+
+main .boites .address {
+    display: block;
+    font-weight: bolder;
+    font-size: larger;
+    text-align: center;
+}
+
+main .boites ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+main .boites ul li {
+    padding: 5px 10px;
+}
+
+main .boites ul li:hover {
+    background-color: #eee;
+}
+
+main .boites ul li.active {
+    background-color: dodgerblue;
+    color: white;
+}
+
+main .boites ul li.active:hover {
+    background-color: #66b3ff;
+    color: white;
+}
+
+main .mails {
+    grid-column: 2;
+    grid-row: 1 / span 4;
+}
+
+main .mails ul {
+    padding: 10px 0;
+}
+
+main .mails ul li {
+    list-style-type: none;
+    padding: 10px;
+    background-color: #eee;
+    margin-bottom: 10px;
+    border-left: 5px solid dodgerblue;
+}
+
+main .mails ul li span {
+    display: block;
+}
+
+main .mails ul li span.auteur {
+    font-weight: bold;
+    margin-left: 20px;
+}
+
+main .en-tete {
+    grid-column: 3 / span 3;
+    grid-row: 1;
+}
+
+main .contenu {
+    grid-column: 3 / span 3;
+    grid-row: 2 / span 3;
+}
+
+main .debut {
+    font-style: italic;
+    font-size: smaller;
+}
+
+main .en-tete {
+    padding: 10px 5px;
+}
+
+main .en-tete th {
+    text-align: right;
+}
+
+main .en-tete th, main .en-tete td {
+    padding: 0 5px;
+}
+
+main .contenu {
+    padding: 20px;
+}
+
+main .contenu iframe {
+    width: 100%;
+    height: 100%;
+    border: 1px solid #222;
+    border-radius: 20px;
+}

