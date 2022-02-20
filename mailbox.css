@@ -77,6 +77,10 @@ main .mails ul li {
     border-left: 5px solid dodgerblue;
 }
 
+main .mails ul li:hover {
+    background-color: #ddd;
+}
+
 main .mails ul li span {
     display: block;
 }
